@@ -1,72 +1,52 @@
 ﻿using System;
+using Calculator;
+using System.Numerics;
 
 namespace lb1
 {
+    public class DigitConsoleCalculator
+    {
+	    private readonly DigitCalculator _calculator;
+
+	    public DigitConsoleCalculator()
+	    {
+	    	_calculator = new DigitCalculator();
+	    }
+
+	    public void ShowCalculator()
+	    {
+		    Console.WriteLine(_calculator.MemoryNumber);
+		    string operation = Console.ReadLine();
+		    if (operation.Equals("exit"))
+		    {
+		    	Environment.Exit(0);
+		    }
+		    try
+		    {
+			    double number = Convert.ToDouble(Console.ReadLine());
+			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, number, operation);
+			    Console.Clear();
+		    }
+		    catch (Exception exception)
+		    {
+			    Console.Clear();
+			    Console.WriteLine(exception.Message);
+		    }
+		    finally
+		    {
+			    ShowCalculator();
+		    }
+	    }
+    }
+
+
+
     class Program
     {
-        static void Main(string[] args)
-{
-	MemoryNumber = 0;
-	ShowCalculator();
-}
-public static double MemoryNumber { get; set; }
-public static double Plus(double first, double second)
-{
-	return first + second;
-}
-public static double Minus(double first, double second)
-{
-	return first - second;
-}
-public static double Multiply(double first, double second)
-{
-	return first * second;
-}
-public static double Divide(double first, double second)
-{
-	if (second == 0)
-		throw new DivideByZeroException();
-	return first / second;
-}
-public static double Calculate(double first, double second, string operation)
-{
-	switch (operation)
-	{
-		case "+":
-			return Plus(first, second);
-		case "-":
-			return Minus(first, second);
-		case "*":
-			return Multiply(first, second);
-		case "/":
-			return Divide(first, second);
-		default:
-			throw new Exception("No such operation!");
-	}
-}
-public static void ShowCalculator()
-{
-	Console.WriteLine(MemoryNumber);
-	string operation = Console.ReadLine();
-	if (operation.Equals("exit"))
-	{
-		Environment.Exit(0);
-	}
-	try
-	{
-		double number = Convert.ToDouble(Console.ReadLine());
-		MemoryNumber = Calculate(MemoryNumber, number, operation);
-		Console.Clear();
-	}
-	catch (Exception exception)
-	{
-		Console.Clear();
-		Console.WriteLine(exception.Message);
-	}
-	finally
-	{
-		ShowCalculator();
-	}
-}
+	    static void Main(string[] args)
+	    {
+	    	DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator();
+	    	digitConsoleCalculator.ShowCalculator();
+	    }
     }
 }
