@@ -59,11 +59,15 @@ namespace lb1
 		    }
 		    try
 		    {
-				Regex rg = new Regex("^(?:(?<real>[+\-]?\d+(?:(?:\.\d+)?(?:[eE][+\-]?\d+)?)?)?(?:[+\-]))?(?<imaginary>[+\-]?\d+(?:(?:\.\d+)?(?:[eE]?[+\-]\d+)?)?)?[iI]$");
+				Regex rg = new Regex(@"([-+]?\d+\,?\d*|[-+]?\d*\.?\d+)");
 				string inp = Console.ReadLine();
 				MatchCollection matched = rg.Matches(inp);
-			    double number = Convert.ToDouble(Console.ReadLine());
-			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, number, operation);
+				string realStr = matched[0].Value;
+				string invStr = matched[1].Value;
+				double real = Convert.ToDouble(realStr);
+				double inv = Double.Parse(invStr);
+				Complex nowEnted = new Complex(real , inv );
+			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, nowEnted, operation);
 			    Console.Clear();
 		    }
 		    catch (Exception exception)
