@@ -55,7 +55,7 @@ namespace Calculator{
     {
 	    internal ComplexCalculator()
 	    {
-		    Memory = 0;
+		    double Memory = 0;
 	    }
 	    public Complex MemoryNumber { get; set; }
 	    public Complex Plus(Complex first, Complex second)
