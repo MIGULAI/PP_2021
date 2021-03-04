@@ -2,14 +2,15 @@
 using Calculator;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace lb1
 {
-    public class DigitConsoleCalculator 
+    public class DigitConsoleCalculator
     {
-	    private readonly DigitCalculator _calculator;
+	    private ICalculator<TArgument, in TOperation> where TArgument : struct _calculator;
 
-	    public DigitConsoleCalculator()
+	    public DigitConsoleCalculator(ICalculator _calc)
 	    {
 	    	_calculator = new DigitCalculator();
 	    }
@@ -59,20 +60,22 @@ namespace lb1
 		    }
 		    try
 		    {
-				Regex rg = new Regex(@"([-+]?\d+\,?\d*|[-+]?\d*\.?\d+)");
+				Regex rg = new Regex(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
 				string inp = Console.ReadLine();
+				
 				MatchCollection matched = rg.Matches(inp);
+				Console.WriteLine("r :" + matched[0].Value + " m :" + matched[1].Value );
 				string realStr = matched[0].Value;
 				string invStr = matched[1].Value;
-				double real = Convert.ToDouble(realStr);
+				double real = Double.Parse(realStr);
 				double inv = Double.Parse(invStr);
 				Complex nowEnted = new Complex(real , inv );
 			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, nowEnted, operation);
-			    Console.Clear();
+			    //Console.Clear();
 		    }
 		    catch (Exception exception)
 		    {
-			    Console.Clear();
+			    //Console.Clear();
 			    Console.WriteLine(exception.Message);
 		    }
 		    finally
@@ -88,10 +91,11 @@ namespace lb1
     {
 	    static void Main(string[] args)
 	    {
-			ComplexConsoleCalculator complexConsoleCalculator = new ComplexConsoleCalculator();
-			complexConsoleCalculator.ShowCalculator(); 
-	    	//DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator();
-	    	//digitConsoleCalculator.ShowCalculator();
+			ComplexCalculator complexCalculator = new ComplexCalculator();
+			//complexConsoleCalculator.ShowCalculator(); 
+
+	    	DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator(complexCalculator);
+	    	digitConsoleCalculator.ShowCalculator();
 	    }
     }
 }
