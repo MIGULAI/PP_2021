@@ -6,11 +6,51 @@ using System.Globalization;
 
 namespace lb1
 {
+	public class ConsoleCalculator<TArgument> where TArgument: struct
+    {
+		private ICalculator<TArgument, string> _calculator ;
+		public ConsoleCalculator(ICalculator<TArgument , string> _Calc){
+			_calculator = _Calc;
+			/*if(typeof(_calc) ==  typeof(cC)){
+				ComplexConsoleCalculator complexConsoleCalculator = new ComplexConsoleCalculator();
+				complexConsoleCalculator.ShowCalculator();
+			}
+			if(typeof(_calc) == typeof(dC)){
+				DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator();
+				digitConsoleCalculator.ShowCalculator();
+			}*/
+		}
+
+		public void ShowCalculator()
+	    {
+		    Console.WriteLine(_calculator.MemoryNumber);
+		    string operation = Console.ReadLine();
+		    if (operation.Equals("exit"))
+		    {
+		    	Environment.Exit(0);
+		    }
+		    try
+		    {
+			    double number = Convert.ToDouble(Console.ReadLine());
+			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, number, operation);
+			    Console.Clear();
+		    }
+		    catch (Exception exception)
+		    {
+			    Console.Clear();
+			    Console.WriteLine(exception.Message);
+		    }
+		    finally
+		    {
+			    ShowCalculator();
+		    }
+	    }
+	}
     public class DigitConsoleCalculator
     {
-	    private ICalculator<TArgument, in TOperation> where TArgument : struct _calculator;
+		private readonly DigitCalculator _calculator;
 
-	    public DigitConsoleCalculator(ICalculator _calc)
+	    public DigitConsoleCalculator()
 	    {
 	    	_calculator = new DigitCalculator();
 	    }
@@ -89,13 +129,13 @@ namespace lb1
 
     class Program
     {
-	    static void Main(string[] args)
+	    static void Main(string[] args) 
 	    {
+			
 			ComplexCalculator complexCalculator = new ComplexCalculator();
 			//complexConsoleCalculator.ShowCalculator(); 
 
-	    	DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator(complexCalculator);
-	    	digitConsoleCalculator.ShowCalculator();
+	    	ConsoleCalculator<Complex> digitConsoleCalculator = new ConsoleCalculator<Complex>(complexCalculator);
 	    }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 
 namespace Calculator{
-    public interface ICalculator<TArgument, in TOperation> where TArgument : struct
+    public interface ICalculator<TArgument, TOperation> 
     {
 	    TArgument MemoryNumber { get; set; }
 	    TArgument Plus(TArgument first, TArgument second);
