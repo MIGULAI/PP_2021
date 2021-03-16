@@ -1,5 +1,8 @@
 using System;
+using Calculator;
 using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Calculator{
     public interface ICalculator<TArgument, TOperation> 
@@ -9,7 +12,7 @@ namespace Calculator{
 	    TArgument Minus(TArgument first, TArgument second);
 	    TArgument Multiply(TArgument first, TArgument second);
 	    TArgument Divide(TArgument first, TArgument second);
-	    TArgument Calculate(TArgument first, TArgument second, TOperation operation);
+	    TArgument Calculate(TArgument first, String second, TOperation operation);
     }
 
     public class DigitCalculator : ICalculator<double, string>
@@ -33,8 +36,9 @@ namespace Calculator{
 	        	throw new DivideByZeroException();
 	        return first / second;
         }
-        public double Calculate(double first, double second, string operation)
+        public double Calculate(double first, string secondStr, string operation)
         {
+			double second = StringToArg(secondStr);
 	        switch (operation)
 	        {
 		    case "+":
@@ -49,6 +53,10 @@ namespace Calculator{
 		    	throw new Exception("No such operation!");
 	        }
         }
+
+		private double StringToArg(String arg){
+			return Convert.ToDouble(arg);
+		}
     }
 
     public class ComplexCalculator : ICalculator<Complex, string>
@@ -76,8 +84,9 @@ namespace Calculator{
 			throw new DivideByZeroException();
 		return first / second;
 	}
-	public Complex Calculate(Complex first, Complex second, string operation)
+	public Complex Calculate(Complex first, String secondStr, string operation)
 	{
+		Complex second = StringToArg(secondStr);
 		switch (operation)
 		{
 			case "+":
@@ -92,6 +101,18 @@ namespace Calculator{
 				throw new Exception("No such operation!");
 		}
 	}
+	private Complex StringToArg(String arg){
+			Regex rg = new Regex(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
+				
+			MatchCollection matched = rg.Matches(arg);
+			Console.WriteLine("r :" + matched[0].Value + " m :" + matched[1].Value );
+			string realStr = matched[0].Value;
+			string invStr = matched[1].Value;
+			double real = Double.Parse(realStr);
+			double inv = Double.Parse(invStr);
+			Complex nowEnted = new Complex(real , inv );
+			return nowEnted;
+		}
 }
 
 

@@ -11,14 +11,6 @@ namespace lb1
 		private ICalculator<TArgument, string> _calculator ;
 		public ConsoleCalculator(ICalculator<TArgument , string> _Calc){
 			_calculator = _Calc;
-			/*if(typeof(_calc) ==  typeof(cC)){
-				ComplexConsoleCalculator complexConsoleCalculator = new ComplexConsoleCalculator();
-				complexConsoleCalculator.ShowCalculator();
-			}
-			if(typeof(_calc) == typeof(dC)){
-				DigitConsoleCalculator digitConsoleCalculator = new DigitConsoleCalculator();
-				digitConsoleCalculator.ShowCalculator();
-			}*/
 		}
 
 		public void ShowCalculator()
@@ -31,8 +23,8 @@ namespace lb1
 		    }
 		    try
 		    {
-			    double number = Convert.ToDouble(Console.ReadLine());
-			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, number, operation);
+				String num = Console.ReadLine();
+			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, num, operation);
 			    Console.Clear();
 		    }
 		    catch (Exception exception)
@@ -46,7 +38,7 @@ namespace lb1
 		    }
 	    }
 	}
-    public class DigitConsoleCalculator
+    /*public class DigitConsoleCalculator
     {
 		private readonly DigitCalculator _calculator;
 
@@ -65,7 +57,7 @@ namespace lb1
 		    }
 		    try
 		    {
-			    double number = Convert.ToDouble(Console.ReadLine());
+			    String number = Console.ReadLine();
 			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, number, operation);
 			    Console.Clear();
 		    }
@@ -100,7 +92,7 @@ namespace lb1
 		    }
 		    try
 		    {
-				Regex rg = new Regex(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
+				/*Regex rg = new Regex(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
 				string inp = Console.ReadLine();
 				
 				MatchCollection matched = rg.Matches(inp);
@@ -110,12 +102,13 @@ namespace lb1
 				double real = Double.Parse(realStr);
 				double inv = Double.Parse(invStr);
 				Complex nowEnted = new Complex(real , inv );
+				String nowEnted = Console.ReadLine();
 			    _calculator.MemoryNumber = _calculator.Calculate(_calculator.MemoryNumber, nowEnted, operation);
-			    //Console.Clear();
+			    Console.Clear();
 		    }
 		    catch (Exception exception)
 		    {
-			    //Console.Clear();
+			    Console.Clear();
 			    Console.WriteLine(exception.Message);
 		    }
 		    finally
@@ -123,7 +116,7 @@ namespace lb1
 			    ShowCalculator();
 		    }
 	    }
-    }
+    }*/
 
 
 
@@ -134,8 +127,9 @@ namespace lb1
 			
 			ComplexCalculator complexCalculator = new ComplexCalculator();
 			//complexConsoleCalculator.ShowCalculator(); 
-
-	    	ConsoleCalculator<Complex> digitConsoleCalculator = new ConsoleCalculator<Complex>(complexCalculator);
+			DigitCalculator digitCalculator = new DigitCalculator();
+	    	ConsoleCalculator<Complex> consoleCalculator = new ConsoleCalculator<Complex>(complexCalculator);
+			consoleCalculator.ShowCalculator();
 	    }
     }
 }
