@@ -1,5 +1,6 @@
 ﻿using System;
 using Worker;
+using Company;
 
 namespace lb2
 {
@@ -7,7 +8,10 @@ namespace lb2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Company<MainWorker> company = new Company<MainWorker>();
+            HourWorker hourWorker = new HourWorker("Ivan" , "Vladimov" , 2000);
+            company.AddWorker(hourWorker);
+            company.ReturnLast().AdoutMe();
         }
     }
 }

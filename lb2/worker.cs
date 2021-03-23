@@ -3,8 +3,8 @@ using System;
 namespace Worker
 {
     abstract class MainWorker{
-        private string Name {get ; set;}
-        private string Sername {get; set;}
+        protected string Name {get ; set;}
+        protected string Sername {get; set;}
 
         protected int Salary;
 
@@ -23,5 +23,11 @@ namespace Worker
             return Sername;
         }
         public void Working(){}
+
+        public void GetSalary(){}
+        
+        public void AdoutMe(){
+            Console.WriteLine("My name is " + this.Name + " My sername is " + this.Sername + " and selary is " + this.Salary);
+        }
     }
 }

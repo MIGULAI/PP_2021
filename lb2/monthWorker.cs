@@ -1,8 +1,8 @@
 using System;
 
 namespace Worker{
-    class HourWorker : MainWorker {
-        public HourWorker(string _name ,string _sername, int _salary){
+    class MonthWorker : MainWorker {
+        public MonthWorker(string _name ,string _sername , int _salary){
             this.Name = _name;
             this.Sername = _sername;
             this.Salary = _salary;
@@ -14,10 +14,6 @@ namespace Worker{
             Salary = _salary;
         }
         
-        public int GetMonthSalary(){
-            return Salary*5*4*8;
-        }
-
         public int GetSalary(){
             return Salary;
         }
