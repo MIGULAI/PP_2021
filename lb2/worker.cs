@@ -24,7 +24,9 @@ namespace Worker
         }
         public void Working(){}
 
-        public void GetSalary(){}
+        public int GetSalary(){
+            return Salary;
+        }
         
         public void AdoutMe(){
             Console.WriteLine("My name is " + this.Name + " My sername is " + this.Sername + " and selary is " + this.Salary);

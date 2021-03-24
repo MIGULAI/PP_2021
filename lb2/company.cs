@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Linq;
+using System.Linq;
 using Worker;
 
 namespace Company{
 
-class Company<T> where T : class
+class Company<T> where T : MainWorker
 {
     private List<T> workers = new List<T>();
 
@@ -18,7 +18,16 @@ class Company<T> where T : class
         return workers[--i];
     }
     public void SortWorkers(){
+        var sorted = from w in workers
+                     orderby w.GetSalary() descending
+                     select w;
+        workers = sorted.ToList();
+    }
+    public void ReturnLastThree(){
         
+        for(int i = 3; i > 0 ; i--){
+            workers[workers.Count - i].AdoutMe();
+        }
     }
 }
 
