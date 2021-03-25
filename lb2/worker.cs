@@ -2,9 +2,26 @@ using System;
 
 namespace Worker
 {
+    [Serializable()]
     abstract class MainWorker{
+        
         protected string Name {get ; set;}
         protected string Sername {get; set;}
+
+        public string SName {get{
+            return Name;
+        } 
+        private set{
+            Name = value;
+        }}
+
+        public MainWorker(){
+
+        }
+
+        public MainWorker(string _name){
+            SName = _name;
+        }
 
         protected int Salary;
 
@@ -22,14 +39,13 @@ namespace Worker
         public String GetSername(){
             return Sername;
         }
-        public void Working(){}
 
-        public int GetSalary(){
+        public virtual int GetSalary(){
             return Salary;
         }
         
         public void AdoutMe(){
-            Console.WriteLine("My name is " + this.Name + " My sername is " + this.Sername + " and selary is " + this.Salary);
+            Console.WriteLine("My name is " + this.Name + " My sername is " + Sername + " and selary is " + this.GetSalary());
         }
     }
 }

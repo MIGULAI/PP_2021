@@ -14,7 +14,7 @@ namespace Worker{
             Salary = _salary;
         }
         
-        public int GetSalary(){
+        public override int GetSalary(){
             return Salary;
         }
     }

@@ -14,10 +14,11 @@ namespace lb2
             company.AddWorker(monthWorker);
             company.AddWorker(hourWorker);
             company.AddWorker(new MonthWorker("kiril" , "yakupov" , 35000));
-            company.ReturnLast().AdoutMe();
+            
             company.SortWorkers();
-            company.ReturnLast().AdoutMe();
-            company.ReturnLastThree();
+            //company.ReturnLast().AdoutMe();
+            //company.ReturnLastThree();
+            company.SaveToFile();
         }
     }
 }

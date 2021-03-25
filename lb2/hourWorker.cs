@@ -14,12 +14,12 @@ namespace Worker{
             Salary = _salary;
         }
         
-        public int GetMonthSalary(){
-            return Salary*5*4*8;
+        public int GetDaySalary(){
+            return Salary;
         }
 
-        public int GetSalary(){
-            return Salary;
+        public override int GetSalary(){
+            return Salary*5*4*8;
         }
     }
 }
