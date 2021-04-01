@@ -7,7 +7,7 @@ using System.Globalization;
 namespace lb3
 {
 
-	public class ConsoleCalculator<TArgument> where TArgument : struct
+	/*public class ConsoleCalculator<TArgument> where TArgument : struct
 	{
 		private ICalculator<TArgument, string> _calculator;
 		public ConsoleCalculator(ICalculator<TArgument, string> _Calc)
@@ -39,7 +39,7 @@ namespace lb3
 				ShowCalculator();
 			}
 		}
-	}
+	}*/
 	class Program
     {
 

@@ -8,6 +8,8 @@ namespace Calculator
 {
     public abstract class Calculator
     {
+        public virtual string MemoryNumber { get; set; }
+
         public abstract string Calculate(string first, string second, string operation);
     }
 }

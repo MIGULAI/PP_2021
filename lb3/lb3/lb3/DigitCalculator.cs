@@ -12,7 +12,7 @@ namespace Calculator
 		{
 			MemoryNumber = "0";
 		}
-		public string MemoryNumber { get; set; }
+		public override string MemoryNumber { get; set; }
 		public double Plus(double first, double second)
 		{
 			return first + second;

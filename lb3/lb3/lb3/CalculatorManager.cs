@@ -24,12 +24,12 @@ namespace Calculator
 				Console.Clear();
 				if (calcType == 1)
 				{
-					var digitCalculator = new DigitConsoleCalculator((DigitCalculator)CalculatorFactory.Create(CalculatorTypeEnum.Digit));
+					var digitCalculator = new ConsoleCalculator((DigitCalculator)CalculatorFactory.Create(CalculatorTypeEnum.Digit));
 					digitCalculator.ShowCalculator();
 				}
 				if (calcType == 2)
 				{
-					var complexCalculator = new ComplexConsoleCalculator((ComplexCalculator)CalculatorFactory.Create(CalculatorTypeEnum.Complex));
+					var complexCalculator = new ConsoleCalculator((ComplexCalculator)CalculatorFactory.Create(CalculatorTypeEnum.Complex));
 					complexCalculator.ShowCalculator();
 				}
 				if (calcType == 3)
