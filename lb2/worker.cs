@@ -1,19 +1,40 @@
 using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Worker
 {
     [Serializable()]
-    abstract class MainWorker{
-        
-        protected string Name {get ; set;}
-        protected string Sername {get; set;}
+    abstract class MainWorker {
 
+        protected string Name { get; set; }
+        protected string Sername { get; set; }
+
+        protected string type { get; set; }
+        [JsonPropertyName("FName")]
+        public string FName { get {
+                return Name;
+            }
+            private set {
+                Name = value;
+            } }
+
+        [JsonPropertyName("SName")]
         public string SName {get{
-            return Name;
+            return Sername;
         } 
         private set{
-            Name = value;
+            Sername = value;
         }}
+        [JsonPropertyName("CType")]
+        public string CType{
+            get{
+                return type;
+            }
+            set{
+                type = value;
+            }
+        }
 
         public MainWorker(){
 
@@ -46,6 +67,12 @@ namespace Worker
         
         public void AdoutMe(){
             Console.WriteLine("My name is " + this.Name + " My sername is " + Sername + " and selary is " + this.GetSalary());
+        }
+
+        public MainWorker(string fName ,  string sName , string cType){
+            FName = fName;
+            SName = sName;
+            CType = cType;
         }
     }
 }

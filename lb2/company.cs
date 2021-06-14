@@ -4,14 +4,16 @@ using System.Linq;
 using Worker;
 using System.Text.Json;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
 namespace Company{
-
+ [Serializable()]
 class Company<T> where T : MainWorker
 {
-    private List<T> workers = new List<T>();
+    public List<T> workers = new List<T>();
 
+   
     public void AddWorker(T _worker){
         workers.Add(_worker);
     }
@@ -32,12 +34,11 @@ class Company<T> where T : MainWorker
             workers[workers.Count - i].AdoutMe();
         }
     }
-    public void SaveToFile(){
+    public void SaveToFile(Company<T> a){
         string json;
-        workers[0].AdoutMe();
         json = JsonSerializer.Serialize(workers);
-        Console.WriteLine(json);
-        using (FileStream fstream = new FileStream($".note.txt", FileMode.OpenOrCreate))
+        Console.WriteLine ( "1" + json);
+        using (FileStream fstream = new FileStream($"note.txt", FileMode.Create))
             {
                 // преобразуем строку в байты
                 byte[] array = System.Text.Encoding.Default.GetBytes(json);
@@ -46,5 +47,22 @@ class Company<T> where T : MainWorker
         
     }
     }
+    public static List< BufWorker> ReadFromFile(){
+            List<BufWorker> s = new List<BufWorker>();
+        using (StreamReader sr = new StreamReader("note.txt", System.Text.Encoding.Default))
+        {
+        string json;
+        
+
+        while ((json = sr.ReadLine()) != null)
+        {
+            Console.WriteLine("2" + json);
+            List<BufWorker> a = JsonSerializer.Deserialize<List<BufWorker>>(json);
+            return a;
+        }
+        
+        return null;
+        }
+}
 }
 }
